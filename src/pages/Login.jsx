@@ -1,17 +1,46 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { Mail, Lock, Eye, ArrowRight, Zap } from "lucide-react";
-
+import { useContext } from "react";
+import { useNavigate } from "react-router";
+import { MyShop } from "../context/MyContext";
+import { toast } from "react-toastify";
 const Login = () => {
+  const navigate = useNavigate();
+  const { registerUsers, setLoggedInUser } = useContext(MyShop);
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    mode: "onChange",
+  });
 
   const onSubmit = (data) => {
-    console.log("Form Submitted:", data);
-    // Handle form submission, e.g., API call
+    let user = registerUsers.find((val) => {
+      return val.email === data.email && val.password === data.password;
+    });
+    if (!user) {
+      toast.error("Invalid credentials!", {
+        position: "bottom-right",
+        autoClose: 3000,
+      });
+      reset();
+      return;
+    }
+
+    setLoggedInUser(user);
+    localStorage.setItem("loggedinUser", JSON.stringify(user));
+
+    toast.success("Login successful!", {
+      position: "bottom-right",
+      autoClose: 3000,
+    });
+
+    setTimeout(() => {
+      navigate("/home");
+    }, 1000);
   };
 
   return (
@@ -95,12 +124,13 @@ const Login = () => {
               </div>
               <input
                 type="email"
+                autoComplete="username"
                 placeholder="Email address"
                 {...register("email", {
                   required: "Email is required",
                   pattern: {
-                    value: /^\S+@\S+$/i,
-                    message: "Invalid email address",
+                    value: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/,
+                    message: "Please enter a valid email address",
                   },
                 })}
                 className="w-full pl-12 pr-4 py-4 bg-[#1a1a1a] border border-[#262626] rounded-xl text-[#f3f4f6] placeholder-[#6b7280] focus:outline-none focus:ring-1 focus:ring-[#befd26] focus:border-[#befd26] transition-all"
@@ -119,8 +149,17 @@ const Login = () => {
               </div>
               <input
                 type="password"
+                autoComplete="current-password"
                 placeholder="Password"
-                {...register("password", { required: "Password is required" })}
+                {...register("password", {
+                  required: "Password is required",
+                  pattern: {
+                    value:
+                      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#^()_\-+=])[A-Za-z\d@$!%*?&#^()_\-+=]{8,}$/,
+                    message:
+                      "Password must contain uppercase, lowercase, number, and special character",
+                  },
+                })}
                 className="w-full pl-12 pr-12 py-4 bg-[#1a1a1a] border border-[#262626] rounded-xl text-[#f3f4f6] placeholder-[#6b7280] focus:outline-none focus:ring-1 focus:ring-[#befd26] focus:border-[#befd26] transition-all"
               />
               <button
@@ -147,15 +186,16 @@ const Login = () => {
           </form>
 
           {/* Bottom Link */}
-          <p className="text-center text-[#9ca3af] mt-10 text-sm">
+          <div className="text-center text-[#9ca3af] mt-10 text-sm">
             Don't have an account?{" "}
-            <a
-              href="#"
+            <button
+              type="button"
+              onClick={() => navigate("/register")}
               className="text-[#befd26] font-medium hover:underline ml-1"
             >
               Create one
-            </a>
-          </p>
+            </button>
+          </div>
         </div>
       </div>
     </div>
