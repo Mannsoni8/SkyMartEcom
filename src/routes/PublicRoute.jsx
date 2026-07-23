@@ -6,7 +6,7 @@ const PublicRoute = () => {
   const { loggedInUser } = useContext(MyShop);
 
   if (loggedInUser) {
-    return <Navigate to={"/main"} />;
+    return <Navigate to={"/home"} />;
   }
 
   return <Outlet />;
