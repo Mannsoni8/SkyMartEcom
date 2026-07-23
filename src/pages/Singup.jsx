@@ -1,4 +1,4 @@
-import { ArrowRight, Bolt, User, Mail, Lock, Eye } from "lucide-react";
+import { ArrowRight, Bolt, User, Mail, Lock, Eye, Zap } from "lucide-react";
 import { useContext } from "react";
 import { useNavigate } from "react-router";
 import { MyShop } from "../context/MyContext";
@@ -17,6 +17,22 @@ const Signup = () => {
   } = useForm({
     mode: "onChange",
   });
+
+  const pass = watch("password", "");
+  const getPasswordStrength = () => {
+    let strength = 0;
+
+    if (pass.length >= 8) strength++;
+    if (/[A-Z]/.test(pass)) strength++;
+    if (/[a-z]/.test(pass)) strength++;
+    if (/[0-9]/.test(pass)) strength++;
+    if (/[^A-Za-z0-9]/.test(pass)) strength++;
+
+    return strength;
+  };
+
+  const ps = getPasswordStrength();
+
   const formSubmit = (data) => {
     const userExists = registerUsers.some((user) => user.email === data.email);
 
@@ -49,184 +65,187 @@ const Signup = () => {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-[#111111] px-4">
-      <div className="w-full max-w-md">
-        {/* Logo */}
-
-        <div className="mb-10 flex justify-center">
+    <div className="min-h-screen bg-[#0B0B0B] flex items-center justify-center px-4 py-4">
+      <div className="relative w-full max-w-lg rounded-[32px] border border-white/10 bg-[#151515]/90 backdrop-blur-xl p-10 shadow-[0_0_60px_rgba(0,0,0,0.4)]">
+        <div className="flex justify-center mb-6">
           <div className="flex items-center gap-3">
-            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-lime-400">
-              <Bolt className="fill-black text-black" size={20} />
+            <div className="h-10 w-10 rounded-xl bg-lime-400 flex items-center justify-center">
+              <Zap className="text-black fill-black" size={22} />
             </div>
 
-            <h1 className="text-4xl font-bold text-white">
+            <h1 className="text-3xl font-bold text-white">
               Sky<span className="text-lime-400">Mart</span>
             </h1>
           </div>
         </div>
 
-        {/* Card */}
+        <div className="text-center mb-6">
+          <h2 className="text-3xl font-bold text-white">Create Account</h2>
 
-        <div className="rounded-[30px] border border-[#2a2a2a] bg-[#151515] p-10 shadow-2xl">
-          <h2 className="text-5xl font-bold text-white">Create account</h2>
-
-          <p className="mt-2 text-lg text-gray-500">
-            Join SkyMart and start shopping
+          <p className="mt-2 text-sm text-gray-400">
+            Join thousands of shoppers around the world.
           </p>
+        </div>
 
-          <form onSubmit={handleSubmit(formSubmit)}>
-            <div className="relative mt-10">
-              <User
-                size={20}
-                className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-500"
-              />
+        <form onSubmit={handleSubmit(formSubmit)} className="space-y-4">
+          <div className="relative">
+            <User
+              size={20}
+              className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-500"
+            />
+            <input
+              type="text"
+              placeholder="Full Name"
+              {...register("name", {
+                required: "Name is required",
+                minLength: {
+                  value: 3,
+                  message: "Name must be at least 3 characters",
+                },
+              })}
+              className="w-full h-12 rounded-xl bg-[#1D1D1D] border border-white/10 pl-12 pr-4 text-white placeholder:text-gray-500 focus:border-lime-400 outline-none"
+            />
 
-              <input
-                type="text"
-                autoComplete="name"
-                placeholder="Full name"
-                {...register("name", {
-                  required: "Full name is required",
-                  pattern: {
-                    value: /^[A-Za-z ]{3,30}$/,
-                    message: "Enter a valid full name",
-                  },
-                })}
-                className="h-16 w-full rounded-2xl border border-[#343434] bg-[#1f1f1f] pl-14 pr-5 text-lg text-white outline-none placeholder:text-gray-500 focus:border-lime-400"
-              />
+            {errors.name && (
+              <p className="text-red-400 text-sm mt-1">{errors.name.message}</p>
+            )}
+          </div>
 
-              {errors.name && (
-                <p className="mt-2 text-sm text-red-500">
-                  {errors.name.message}
-                </p>
-              )}
-            </div>
+          <div className="relative">
+            <Mail
+              size={20}
+              className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-500"
+            />
 
-            {/* Email */}
+            <input
+              type="email"
+              placeholder="Email Address"
+              {...register("email", {
+                required: "Email is required",
+                pattern: {
+                  value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                  message: "Enter a valid email",
+                },
+              })}
+              className="w-full h-12 rounded-xl bg-[#1D1D1D] border border-white/10 pl-12 pr-4 text-white placeholder:text-gray-500 focus:border-lime-400 outline-none"
+            />
 
-            <div className="relative mt-5">
-              <Mail
-                size={20}
-                className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-500"
-              />
+            {errors.email && (
+              <p className="text-red-400 text-sm mt-1">
+                {errors.email.message}
+              </p>
+            )}
+          </div>
 
-              <input
-                type="email"
-                autoComplete="username"
-                placeholder="Email"
-                {...register("email", {
-                  required: "Email is required",
-                  pattern: {
-                    value: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/,
-                    message: "Please enter a valid email",
-                  },
-                })}
-                className="h-16 w-full rounded-2xl border border-[#343434] bg-[#1f1f1f] pl-14 pr-5 text-lg text-white outline-none placeholder:text-gray-500 focus:border-lime-400"
-              />
+          <div className="relative">
+            <Lock
+              size={20}
+              className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-500"
+            />
 
-              {errors.email && (
-                <p className="mt-2 text-sm text-red-500">
-                  {errors.email.message}
-                </p>
-              )}
-            </div>
+            <input
+              type="password"
+              placeholder="Password"
+              {...register("password", {
+                required: "Password is required",
+                minLength: {
+                  value: 8,
+                  message: "Password must be at least 8 characters",
+                },
+                validate: (value) =>
+                  /[A-Z]/.test(value) || "Must contain one uppercase letter",
+              })}
+              className="w-full h-12 rounded-xl bg-[#1D1D1D] border border-white/10 pl-12 pr-4 text-white placeholder:text-gray-500 focus:border-lime-400 outline-none"
+            />
 
-            {/* Password */}
+            {errors.password && (
+              <p className="text-red-400 text-sm mt-1">
+                {errors.password.message}
+              </p>
+            )}
 
-            <div className="relative mt-5">
-              <Lock
-                size={20}
-                className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-500"
-              />
+            <Eye
+              size={18}
+              className="absolute right-5 top-1/2 -translate-y-1/2 text-gray-500 cursor-pointer"
+            />
+          </div>
 
-              <input
-                type="password"
-                autoComplete="new-password"
-                placeholder="Password"
-                {...register("password", {
-                  required: "Password is required",
-                  pattern: {
-                    value:
-                      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#^()_\-+=])[A-Za-z\d@$!%*?&#^()_\-+=]{8,}$/,
-                    message:
-                      "Min 8 chars, uppercase, lowercase, number & special character",
-                  },
-                })}
-                className="h-16 w-full rounded-2xl border border-[#343434] bg-[#1f1f1f] pl-14 pr-14 text-lg text-white outline-none placeholder:text-gray-500 focus:border-lime-400"
-              />
+          <div className="flex items-center gap-2">
+            {[1, 2, 3, 4, 5].map((item) => (
+              <div
+                key={item}
+                className={`h-1 flex-1 rounded-full ${
+                  item <= ps
+                    ? ps <= 2
+                      ? "bg-red-400"
+                      : ps <= 3
+                        ? "bg-yellow-400"
+                        : "bg-lime-400"
+                    : "bg-white/10"
+                }`}
+              ></div>
+            ))}
 
-              {errors.password && (
-                <p className="mt-2 text-sm text-red-500">
-                  {errors.password.message}
-                </p>
-              )}
-
-              <Eye
-                size={18}
-                className="absolute right-5 top-1/2 -translate-y-1/2 cursor-pointer text-gray-500"
-              />
-            </div>
-
-            <div className="mt-5 flex items-center gap-3">
-              <div className="h-1.5 flex-1 rounded-full bg-yellow-400"></div>
-
-              <div className="h-1.5 flex-1 rounded-full bg-yellow-400"></div>
-
-              <div className="h-1.5 flex-1 rounded-full bg-[#333333]"></div>
-
-              <span className="text-yellow-400 font-medium">Medium</span>
-            </div>
-
-            <div className="relative mt-6">
-              <Lock
-                size={20}
-                className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-500"
-              />
-
-              <input
-                type="password"
-                autoComplete="new-password"
-                placeholder="Confirm password"
-                {...register("confirmPassword", {
-                  required: "Confirm password is required",
-                  validate: (value) =>
-                    value === watch("password") || "Passwords do not match",
-                })}
-                className="h-16 w-full rounded-2xl border border-[#343434] bg-[#1f1f1f] pl-14 pr-5 text-lg text-white outline-none placeholder:text-gray-500 focus:border-lime-400"
-              />
-
-              {errors.confirmPassword && (
-                <p className="mt-2 text-sm text-red-500">
-                  {errors.confirmPassword.message}
-                </p>
-              )}
-            </div>
-
-            <button
-              type="submit"
-              disabled={!isValid}
-              className={`mt-8 flex h-16 w-full items-center justify-center gap-3 rounded-2xl text-2xl font-semibold transition ${
-                isValid
-                  ? "bg-lime-400 text-black hover:bg-lime-300"
-                  : "bg-gray-600 text-gray-400 cursor-not-allowed"
+            <span
+              className={`text-sm ${
+                ps <= 2
+                  ? "text-red-400"
+                  : ps <= 3
+                    ? "text-yellow-400"
+                    : "text-lime-400"
               }`}
             >
-              Create Account
-              <ArrowRight size={24} />
-            </button>
-          </form>
-
-          <div className="mt-8 text-center text-lg text-gray-500">
-            Already have an account?
-            <button
-              onClick={() => navigate("/")}
-              type="button"
-              className="ml-2 cursor-pointer font-semibold text-lime-400 hover:underline"
-            >
-              Sign in
-            </button>
+              {pass ? (ps <= 2 ? "Weak" : ps <= 3 ? "Medium" : "Strong") : ""}
+            </span>
           </div>
-        </div>
+
+          <div className="relative">
+            <Lock
+              size={20}
+              className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-500"
+            />
+
+            <input
+              type="password"
+              placeholder="Confirm Password"
+              {...register("confirmPassword", {
+                required: "Please confirm your password",
+                validate: (value) =>
+                  value === watch("password") || "Passwords do not match",
+              })}
+              className="w-full h-14 rounded-xl bg-[#1D1D1D] border border-white/10 pl-14 pr-4 text-white placeholder:text-gray-500 focus:border-lime-400 outline-none"
+            />
+
+            {errors.confirmPassword && (
+              <p className="text-red-400 text-sm mt-1">
+                {errors.confirmPassword.message}
+              </p>
+            )}
+          </div>
+
+          <button
+            disabled={!isValid}
+            className={`mt-3 w-full h-14 rounded-xl font-semibold text-base flex items-center justify-center gap-2 transition ${
+              isValid
+                ? "bg-lime-400 text-black hover:scale-[1.02]"
+                : "bg-gray-600 text-gray-400 cursor-not-allowed"
+            }`}
+          >
+            Create Account
+            <ArrowRight size={20} />
+          </button>
+        </form>
+
+        <p className="text-center text-gray-400 mt-8">
+          Already have an account?
+          <button
+            type="button"
+            onClick={() => navigate("/")}
+            className="ml-2 text-lime-400 hover:underline font-medium"
+          >
+            Sign In
+          </button>
+        </p>
       </div>
     </div>
   );
