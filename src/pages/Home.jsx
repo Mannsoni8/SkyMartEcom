@@ -1,7 +1,10 @@
 import { ArrowRight, Package, TrendingUp, Star, Tag } from "lucide-react";
+import { useContext } from "react";
+import { MyShop } from "../context/MyContext";
 
 const Home = () => {
   const hour = new Date().getHours();
+  const { loggedInUser } = useContext(MyShop);
 
   const greeting =
     hour < 12 ? "GOOD MORNING" : hour < 17 ? "GOOD AFTERNOON" : "GOOD EVENING";
@@ -69,7 +72,9 @@ const Home = () => {
 
               <h1 className="text-7xl font-bold leading-none">Welcome back,</h1>
 
-              <h1 className="mb-8 text-7xl font-bold text-lime-400">Mann!</h1>
+              <h1 className="mb-8 text-7xl font-bold text-lime-400">
+                {loggedInUser.name}
+              </h1>
 
               <p className="mb-10 max-w-xl text-xl leading-9 text-gray-400">
                 Discover today's picks — hand-curated products across

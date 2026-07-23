@@ -1,15 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavLink } from "react-router";
 import { Zap, ShoppingCart, LogOut, Menu, User } from "lucide-react";
+import { MyShop } from "../context/MyContext";
 
-const Navbar = () => {
+const Navbar = ({ onCartClick }) => {
+  let { cartItems } = useContext(MyShop);
   const navLinkClass = ({ isActive }) =>
     `relative pb-1 font-medium transition-all duration-300 ${
       isActive
         ? "text-lime-400 after:absolute after:left-0 after:-bottom-1 after:w-full after:h-[2px] after:bg-lime-400"
         : "text-gray-300 hover:text-white"
     }`;
-
+  const { loggedInUser } = useContext(MyShop);
   return (
     <header className="sticky top-0 z-50 bg-[#0D0D0D] border-b border-white/10">
       <div className="max-w-7xl mx-auto px-5 h-16 flex items-center justify-between">
@@ -44,14 +46,18 @@ const Navbar = () => {
               <User size={16} className="text-black" />
             </div>
 
-            <span className="text-sm text-gray-300 font-medium">Mann Soni</span>
+            <span className="text-sm text-gray-300 font-medium">
+              {loggedInUser.name}
+            </span>
           </div>
-
-          <button className="relative p-3 rounded-xl text-white bg-white/5 border border-white/10">
+          <button
+            onClick={onCartClick}
+            className="relative p-3 rounded-xl text-white bg-white/5 border border-white/10 hover:bg-white/10 transition"
+          >
             <ShoppingCart size={18} />
 
-            <span className="absolute -top-1 -right-1 bg-lime-400 text-black text-[10px] font-bold rounded-full h-5 w-5 flex items-center justify-center">
-              0
+            <span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-lime-400 text-[10px] font-bold text-black">
+              {cartItems.length}
             </span>
           </button>
 
