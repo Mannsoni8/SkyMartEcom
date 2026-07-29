@@ -19,6 +19,7 @@
     "react-router": "^8.2.0",
     "react-routes": "^0.2.6",
     "react-toastify": "^11.1.0",
+    "run": "^1.5.0",
     "tailwindcss": "^4.3.3"
   },
   "devDependencies": {

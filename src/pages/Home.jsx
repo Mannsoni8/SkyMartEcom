@@ -63,8 +63,6 @@ const Home = () => {
       iconColor: "text-purple-400",
     },
   ];
-  const cartItems = 0;
-  const cartValue = 0;
 
   const topRated = [...products]
     .sort((a, b) => b.rating - a.rating)
@@ -203,57 +201,6 @@ const Home = () => {
                 </div>
               </div>
             ))}
-          </div>
-          <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-            {[
-              {
-                title: "Cart Items",
-                value: cartItems,
-                icon: ShoppingCart,
-                color: "text-[#C8F400]",
-              },
-              {
-                title: "Cart Value",
-                value: `$${cartValue.toFixed(2)}`,
-                icon: DollarSign,
-                color: "text-blue-400",
-              },
-              {
-                title: "Top Products",
-                value: topRated.length,
-                icon: Star,
-                color: "text-yellow-400",
-              },
-              {
-                title: "Categories",
-                value: categories.length,
-                icon: Tag,
-                color: "text-purple-400",
-              },
-            ].map((item) => {
-              const Icon = item.icon;
-
-              return (
-                <div
-                  key={item.title}
-                  className="rounded-2xl border border-white bg-[#111111] p-5"
-                >
-                  <div className="flex items-center gap-4">
-                    <div className={`rounded-xl bg-white/5 p-3 ${item.color}`}>
-                      <Icon size={20} />
-                    </div>
-
-                    <div>
-                      <h2 className="font-syne  text-3xl">{item.value}</h2>
-
-                      <p className="font-syne text-sm text-zinc-500">
-                        {item.title}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
           </div>
 
           {/* Categories */}
