@@ -6,12 +6,12 @@ import Footer from "../components/Footer";
 
 const Shope = () => {
   const {
-    filteredProducts,
     products,
     loading,
     category,
     setCategory,
     sortBy,
+    sortedProducts,
     setSortBy,
   } = useContext(MyShop);
 
@@ -19,8 +19,8 @@ const Shope = () => {
 
   const categories = ["all", ...new Set(products.map((item) => item.category))];
 
-  const searchedProducts = filteredProducts.filter((item) =>
-    item.title.toLowerCase().includes(search.toLowerCase()),
+  const searchedProducts = sortedProducts.filter((product) =>
+    product.title.toLowerCase().includes(search.toLowerCase()),
   );
 
   if (loading) {
@@ -93,9 +93,9 @@ const Shope = () => {
                 onChange={(e) => setSortBy(e.target.value)}
                 className="appearance-none rounded-xl border border-white/10 bg-[#202020] py-3 pl-4 pr-10 text-sm outline-none"
               >
-                <option>Featured</option>
-                <option>Price: Low → High</option>
-                <option>Price: High → Low</option>
+                <option value="featured">Featured</option>
+                <option value="low">Price: Low → High</option>
+                <option value="high">Price: High → Low</option>
               </select>
 
               <ChevronDown

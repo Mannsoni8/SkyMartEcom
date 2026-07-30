@@ -116,7 +116,6 @@ export const ContextProvider = ({ children }) => {
         loggedInUser,
         setLoggedInUser,
         products,
-        filteredProducts,
         category,
         setCategory,
         loading,
