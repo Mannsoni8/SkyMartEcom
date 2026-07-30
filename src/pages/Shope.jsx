@@ -33,21 +33,17 @@ const Shope = () => {
 
   return (
     <>
-      <div className="min-h-screen bg-[#0D0D0D] text-white px-8 py-10">
+      <div className="min-h-screen bg-[#0D0D0D] text-white px-4 sm:px-6 lg:px-8 py-8">
         <div className="max-w-7xl mx-auto">
           {/* Heading */}
 
-          <h1 className="font-heading font-bold text-3xl sm:text-4xl mb-2">
-            All Products
-          </h1>
+          <h1 className="text-3xl sm:text-4xl font-bold mb-2">All Products</h1>
 
-          <p className="text-white/40 font-body text-sm mb-8">
+          <p className="text-white/40 text-sm mb-6">
             {searchedProducts.length} products found
           </p>
 
-          {/* Search */}
-
-          <div className="mb-6 flex items-center gap-3 rounded-2xl border border-white/10 bg-[#111] p-3">
+          <div className="mb-8 flex flex-col lg:flex-row gap-3 rounded-2xl border border-white/10 bg-[#111] p-3">
             {/* Search */}
 
             <div className="flex flex-1 items-center rounded-xl bg-[#202020] px-4">
@@ -64,11 +60,11 @@ const Shope = () => {
 
             {/* Category */}
 
-            <div className="relative">
+            <div className="relative w-full lg:w-56">
               <select
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
-                className="appearance-none rounded-xl border border-white/10 bg-[#202020] py-3 pl-4 pr-10 text-sm outline-none"
+                className="w-full appearance-none rounded-xl border border-white/10 bg-[#202020] py-3 pl-4 pr-10 text-sm outline-none"
               >
                 {categories.map((cat) => (
                   <option key={cat} value={cat}>
@@ -87,11 +83,11 @@ const Shope = () => {
 
             {/* Sort */}
 
-            <div className="relative">
+            <div className="relative w-full lg:w-56">
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
-                className="appearance-none rounded-xl border border-white/10 bg-[#202020] py-3 pl-4 pr-10 text-sm outline-none"
+                className="w-full appearance-none rounded-xl border border-white/10 bg-[#202020] py-3 pl-4 pr-10 text-sm outline-none"
               >
                 <option value="featured">Featured</option>
                 <option value="low">Price: Low → High</option>
@@ -107,13 +103,14 @@ const Shope = () => {
 
           {/* Products */}
 
-          <div className="grid grid-cols-5 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
             {searchedProducts.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
           </div>
         </div>
       </div>
+
       <Footer />
     </>
   );
