@@ -1,17 +1,22 @@
 import React, { useContext } from "react";
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 import { Zap, ShoppingCart, LogOut, Menu, User } from "lucide-react";
 import { MyShop } from "../context/MyContext";
 
 const Navbar = ({ onCartClick }) => {
-  let { cartItems } = useContext(MyShop);
+  let { cartItems, logout } = useContext(MyShop);
+
+  const navigate = useNavigate();
+
   const navLinkClass = ({ isActive }) =>
     `relative pb-1 font-medium transition-all duration-300 ${
       isActive
         ? "text-lime-400 after:absolute after:left-0 after:-bottom-1 after:w-full after:h-[2px] after:bg-lime-400"
         : "text-gray-300 hover:text-white"
     }`;
+
   const { loggedInUser } = useContext(MyShop);
+
   return (
     <header className="sticky top-0 z-50 bg-[#0D0D0D] border-b border-white/10">
       <div className="max-w-7xl mx-auto px-5 h-16 flex items-center justify-between">
@@ -64,6 +69,10 @@ const Navbar = ({ onCartClick }) => {
           <button
             title="Logout"
             className="p-3 rounded-xl bg-white/5 border border-white/10 text-gray-300 hover:bg-red-500/20 hover:border-red-500 hover:text-red-400 transition-all duration-300"
+            onClick={() => {
+              logout();
+              navigate("/");
+            }}
           >
             <LogOut size={18} />
           </button>

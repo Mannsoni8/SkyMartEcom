@@ -2,7 +2,7 @@ import { ArrowRight, Bolt, User, Mail, Lock, Eye, Zap } from "lucide-react";
 import { useContext } from "react";
 import { useNavigate } from "react-router";
 import { MyShop } from "../context/MyContext";
-import { toast } from "react-toastify";
+import { Slide, toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 
 const Signup = () => {
@@ -52,9 +52,16 @@ const Signup = () => {
 
     localStorage.setItem("registerUsers", JSON.stringify(arr));
 
-    toast.success("Account created successfully!", {
-      position: "bottom-right",
-      autoClose: 3000,
+    toast.success("Singup successfully", {
+      position: "top-left",
+      autoClose: 1000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      transition: Slide,
     });
 
     reset();

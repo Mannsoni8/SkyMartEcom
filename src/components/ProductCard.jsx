@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
-import { ShoppingCart, Star } from "lucide-react";
+import { ShoppingCart } from "lucide-react";
 import { MyShop } from "../context/MyContext";
+import { Slide, toast } from "react-toastify";
 
 const ProductCard = ({ product }) => {
   const { cartItems, setCartItems, setIsCartOpen } = useContext(MyShop);
@@ -27,6 +28,17 @@ const ProductCard = ({ product }) => {
     }
 
     setIsCartOpen(true);
+    toast.success("Added to cart", {
+      position: "top-left",
+      autoClose: 1000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      transition: Slide,
+    });
   };
 
   return (
@@ -53,27 +65,6 @@ const ProductCard = ({ product }) => {
         <h2 className="line-clamp-2 h-14 text-xl font-semibold">
           {product.title}
         </h2>
-
-        {/* Rating */}
-
-        {/* <div className="flex items-center gap-1">
-          {[...Array(5)].map((_, index) => (
-            <Star
-              key={index}
-              size={14}
-              fill={
-                index < Math.round(product.rating.rate)
-                  ? "#FACC15"
-                  : "transparent"
-              }
-              className="text-yellow-400"
-            />
-          ))}
-
-          <span className="ml-2 text-sm text-gray-500">
-            ({product.rating.count})
-          </span>
-        </div> */}
 
         <div className="border-t border-white/10"></div>
 

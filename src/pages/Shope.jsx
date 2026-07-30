@@ -5,8 +5,15 @@ import ProductCard from "../components/ProductCard";
 import Footer from "../components/Footer";
 
 const Shope = () => {
-  const { filteredProducts, products, loading, category, setCategory } =
-    useContext(MyShop);
+  const {
+    filteredProducts,
+    products,
+    loading,
+    category,
+    setCategory,
+    sortBy,
+    setSortBy,
+  } = useContext(MyShop);
 
   const [search, setSearch] = useState("");
 
@@ -81,11 +88,14 @@ const Shope = () => {
             {/* Sort */}
 
             <div className="relative">
-              <select className="appearance-none rounded-xl border border-white/10 bg-[#202020] py-3 pl-4 pr-10 text-sm outline-none">
+              <select
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value)}
+                className="appearance-none rounded-xl border border-white/10 bg-[#202020] py-3 pl-4 pr-10 text-sm outline-none"
+              >
                 <option>Featured</option>
                 <option>Price: Low → High</option>
                 <option>Price: High → Low</option>
-                <option>Rating</option>
               </select>
 
               <ChevronDown

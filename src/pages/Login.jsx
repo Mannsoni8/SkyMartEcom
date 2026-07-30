@@ -4,7 +4,7 @@ import { Mail, Lock, Eye, ArrowRight, Zap } from "lucide-react";
 import { useContext } from "react";
 import { useNavigate } from "react-router";
 import { MyShop } from "../context/MyContext";
-import { toast } from "react-toastify";
+import { Slide, toast } from "react-toastify";
 const Login = () => {
   const navigate = useNavigate();
   const { registerUsers, setLoggedInUser } = useContext(MyShop);
@@ -33,9 +33,16 @@ const Login = () => {
     setLoggedInUser(user);
     localStorage.setItem("loggedinUser", JSON.stringify(user));
 
-    toast.success("Login successful!", {
-      position: "bottom-right",
-      autoClose: 3000,
+   toast.success("Logged In successfully", {
+      position: "top-left",
+      autoClose: 1000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      transition: Slide,
     });
 
     setTimeout(() => {

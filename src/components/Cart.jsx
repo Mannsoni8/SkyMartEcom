@@ -3,7 +3,8 @@ import { X, Minus, Plus, Trash2 } from "lucide-react";
 import { MyShop } from "../context/MyContext";
 
 const Cart = ({ open, onClose }) => {
-  const { cartItems } = useContext(MyShop);
+  const { cartItems, incrementQuntatity, decrementQuntatity, removeFromCart } =
+    useContext(MyShop);
 
   const subtotal = cartItems.reduce(
     (acc, item) => acc + item.price * item.quantity,
@@ -73,18 +74,27 @@ const Cart = ({ open, onClose }) => {
 
                     <div className="flex items-center justify-between mt-5">
                       <div className="flex items-center rounded-xl bg-[#222]">
-                        <button className="h-9 w-9 flex items-center justify-center hover:bg-[#333] rounded-l-xl">
+                        <button
+                          onClick={() => decrementQuntatity(item.id)}
+                          className="h-9 w-9 flex items-center justify-center hover:bg-[#333] rounded-l-xl"
+                        >
                           <Minus size={18} />
                         </button>
 
                         <span className="px-5">{item.quantity}</span>
 
-                        <button className="h-9 w-9 flex items-center justify-center hover:bg-lime-400 hover:text-black rounded-r-xl">
+                        <button
+                          onClick={() => incrementQuntatity(item.id)}
+                          className="h-9 w-9 flex items-center justify-center hover:bg-lime-400 hover:text-black rounded-r-xl"
+                        >
                           <Plus size={18} />
                         </button>
                       </div>
 
-                      <button className="text-red-400 hover:text-red-500">
+                      <button
+                        onClick={() => removeFromCart(item.id)}
+                        className="text-red-400 hover:text-red-500"
+                      >
                         <Trash2 size={20} />
                       </button>
                     </div>
