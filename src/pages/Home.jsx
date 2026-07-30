@@ -130,11 +130,11 @@ const Home = () => {
   return (
     <>
       <main className="min-h-screen bg-[#0f0f0f]">
-        <div className="mx-auto max-w-[1600px] px-8 py-8 text-amber-50">
+        <div className="mx-auto max-w-[1600px] px-4 py-8 sm:px-6 lg:px-8 text-amber-50">
           {/* Hero */}
           <div className="mx-auto max-w-6xl">
             <div
-              className="rounded-[25px]  border border-white bg-[#151515] p-10"
+              className="rounded-[25px] border border-white bg-[#151515] p-6 sm:p-10"
               style={{
                 backgroundImage: `
           linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
@@ -143,7 +143,7 @@ const Home = () => {
                 backgroundSize: "50px 50px",
               }}
             >
-              <div className="flex justify-between">
+              <div className="flex flex-col gap-10 lg:flex-row lg:items-center lg:justify-between">
                 {/* Left */}
 
                 <div className="max-w-2xl">
@@ -151,11 +151,11 @@ const Home = () => {
                     {greeting} 👋
                   </p>
 
-                  <h1 className="text-5xl font-bold leading-tight">
+                  <h1 className="text-4xl sm:text-5xl font-bold leading-tight">
                     Welcome back,
                   </h1>
 
-                  <h1 className="mb-5 text-5xl font-bold text-lime-400">
+                  <h1 className="mb-5 text-4xl sm:text-5xl font-bold text-lime-400">
                     {loggedInUser.name}
                   </h1>
 
@@ -163,10 +163,10 @@ const Home = () => {
                     Discover today's picks — hand-curated products across
                     electronics, fashion, and more.
                   </p>
-                  <div className="flex gap-5">
+                  <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
                     <NavLink
                       to="/products"
-                      className="flex items-center gap-3 rounded-full bg-lime-400 px-6 py-3 font-semibold text-black transition hover:scale-105"
+                      className="flex items-center justify-center gap-3 rounded-full bg-lime-400 px-6 py-3 font-semibold text-black transition hover:scale-105"
                     >
                       Shop Now
                       <ArrowRight size={20} />
@@ -183,21 +183,21 @@ const Home = () => {
 
                 {/* Right */}
 
-                <div className="flex flex-col gap-6">
-                  <div className="flex h-28 w-40 flex-col items-center justify-center rounded-3xl bg-lime-950 border border-lime-700">
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                  <div className="flex h-28 w-full flex-col items-center justify-center rounded-3xl bg-lime-950 border border-lime-700 px-6 py-4">
                     <h2 className="text-4xl font-bold text-lime-400">
                       {products.length}
                     </h2>
 
-                    <p className="mt-1 text-sm text-gray-300">
+                    <p className="mt-1 text-sm text-gray-300 text-center">
                       Products Available
                     </p>
                   </div>
 
-                  <div className="flex h-28 w-40 flex-col items-center justify-center rounded-3xl border border-white">
-                    <h2 className="text-4xl font-bold ">Free</h2>
+                  <div className="flex h-28 w-full flex-col items-center justify-center rounded-3xl border border-white px-6 py-4">
+                    <h2 className="text-4xl font-bold">Free</h2>
 
-                    <p className="mt-1 text-sm text-gray-400">
+                    <p className="mt-1 text-sm text-gray-400 text-center">
                       Delivery on ₹999+
                     </p>
                   </div>
@@ -207,11 +207,11 @@ const Home = () => {
 
             {/* Stats */}
 
-            <div className="mt-8 grid grid-cols-4 gap-4">
+            <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
               {stats.map((item) => (
                 <div
                   key={item.id}
-                  className="flex items-center gap-4 rounded-3xl border border-gray-700 bg-[#151515] p-5 transition duration-300 hover:-translate-y-1 hover:border-lime-400"
+                  className="flex flex-col sm:flex-row items-center gap-4 rounded-3xl border border-gray-700 bg-[#151515] p-5 transition duration-300 hover:-translate-y-1 hover:border-lime-400"
                 >
                   <div
                     className={`flex h-12 w-12 items-center justify-center rounded-2xl ${item.bg}`}
@@ -291,7 +291,7 @@ const Home = () => {
                   {topRated.map((product) => (
                     <div
                       key={product.id}
-                      className="flex items-center gap-4 rounded-2xl bg-[#262222] border border-zinc-200 p-3 transition hover:border-[#C8F400] cursor-pointer"
+                      className="flex flex-col items-start gap-4 rounded-2xl bg-[#262222] border border-zinc-200 p-3 transition hover:border-[#C8F400] cursor-pointer sm:flex-row sm:items-center"
                     >
                       <img
                         src={product.image}
@@ -341,7 +341,7 @@ const Home = () => {
                   {newArrivals.map((product) => (
                     <div
                       key={product.id}
-                      className="flex items-center gap-4 rounded-2xl bg-[#262222] border border-zinc-200 p-3 transition hover:border-[#C8F400] cursor-pointer"
+                      className="flex flex-col items-start gap-4 rounded-2xl bg-[#262222] border border-zinc-200 p-3 transition hover:border-[#C8F400] cursor-pointer sm:flex-row sm:items-center"
                     >
                       <img
                         src={product.image}
@@ -373,7 +373,7 @@ const Home = () => {
 
             {/* Features */}
 
-            <section className="mt-10 grid gap-5 md:grid-cols-3">
+            <section className="mt-10 grid gap-5 sm:grid-cols-2 md:grid-cols-3">
               {[
                 {
                   title: "Fast Delivery",
@@ -418,7 +418,7 @@ const Home = () => {
           </div>
         </div>
       </main>
-      <Footer />;
+      <Footer />
     </>
   );
 };

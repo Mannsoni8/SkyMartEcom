@@ -38,8 +38,8 @@ const About = () => {
 
   return (
     <>
-      <div className="min-h-screen bg-[#0B0B0B] text-white px-6 py-16">
-        <div className="mx-auto max-w-300">
+      <div className="min-h-screen bg-[#0B0B0B] text-white px-4 py-12 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl">
           {/* Hero */}
 
           <div className="flex flex-col items-center text-center">
@@ -47,11 +47,11 @@ const About = () => {
               <Zap size={26} fill="currentColor" />
             </div>
 
-            <h1 className="font-syne text-5xl font-bold">
+            <h1 className="font-syne text-4xl sm:text-5xl font-bold">
               About <span className="text-[#C8F400]">SkyMart</span>
             </h1>
 
-            <p className="mt-3 max-w-2xl font-dm-regular text-lg leading-8 text-zinc-500">
+            <p className="mt-3 max-w-2xl font-dm-regular text-base sm:text-lg leading-7 sm:leading-8 text-zinc-500">
               SkyMart is a next-generation e-commerce platform built to make
               online shopping fast, fair and enjoyable for everyone.
             </p>
@@ -213,10 +213,12 @@ const About = () => {
 
           {/* CTA */}
 
-          <section className="mt-16 rounded-3xl border border-[#C8F400]/40 bg-[#111111] px-10 py-14 text-center">
-            <h2 className="font-syne text-4xl font-bold">Ready to shop?</h2>
+          <section className="mt-16 rounded-3xl border border-[#C8F400]/40 bg-[#111111] px-6 py-10 text-center sm:px-10 sm:py-14">
+            <h2 className="font-syne text-3xl sm:text-4xl font-bold">
+              Ready to shop?
+            </h2>
 
-            <p className="mx-auto mt-4 max-w-xl font-dm-regular text-lg text-zinc-500">
+            <p className="mx-auto mt-4 max-w-xl font-dm-regular text-base sm:text-lg text-zinc-500">
               Explore thousands of premium products with unbeatable prices and
               lightning-fast delivery.
             </p>

@@ -1,4 +1,13 @@
-import { ArrowRight, Bolt, User, Mail, Lock, Eye, Zap } from "lucide-react";
+import {
+  ArrowRight,
+  Bolt,
+  User,
+  Mail,
+  Lock,
+  Eye,
+  Zap,
+  EyeOff,
+} from "lucide-react";
 import { useContext } from "react";
 import { useNavigate } from "react-router";
 import { MyShop } from "../context/MyContext";
@@ -7,7 +16,8 @@ import { useForm } from "react-hook-form";
 
 const Signup = () => {
   const navigate = useNavigate();
-  const { registerUsers, setRegisterUsers } = useContext(MyShop);
+  const { registerUsers, setRegisterUsers, showPassword, setShowPassword } =
+    useContext(MyShop);
   let {
     register,
     handleSubmit,
@@ -151,7 +161,7 @@ const Signup = () => {
             />
 
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               placeholder="Password"
               {...register("password", {
                 required: "Password is required",
@@ -171,10 +181,17 @@ const Signup = () => {
               </p>
             )}
 
-            <Eye
-              size={18}
-              className="absolute right-5 top-1/2 -translate-y-1/2 text-gray-500 cursor-pointer"
-            />
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute right-4 top-1/2 -translate-y-1/2"
+            >
+              {showPassword ? (
+                <EyeOff className="h-5 w-5 text-[#9ca3af] hover:text-white transition-colors" />
+              ) : (
+                <Eye className="h-5 w-5 text-[#9ca3af] hover:text-white transition-colors" />
+              )}
+            </button>
           </div>
 
           <div className="flex items-center gap-2">

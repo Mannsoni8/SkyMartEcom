@@ -11,7 +11,7 @@ export const ContextProvider = ({ children }) => {
   const [loggedInUser, setLoggedInUser] = useState(
     JSON.parse(localStorage.getItem("loggedinUser")),
   );
-
+  const [showPassword, setShowPassword] = useState(false);
   const [products, setProducts] = useState([]);
   const [category, setCategory] = useState("all");
   const [loading, setLoading] = useState(true);
@@ -130,6 +130,8 @@ export const ContextProvider = ({ children }) => {
         setSortBy,
         sortedProducts,
         logout,
+        showPassword,
+        setShowPassword,
       }}
     >
       {children}

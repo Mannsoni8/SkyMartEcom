@@ -45,7 +45,7 @@ const ProductCard = ({ product }) => {
     <div className="group overflow-hidden rounded-3xl border border-white/10 bg-[#171717] transition-all duration-300 hover:-translate-y-2 hover:border-lime-400">
       {/* Image Section */}
 
-      <div className="relative h-45 bg-white p-5">
+      <div className="relative h-56 sm:h-64 bg-white p-5">
         <span className="absolute left-4 top-4 rounded-full bg-[#6E6E6E] px-3 py-1 text-xs font-semibold capitalize text-white">
           {product.category}
         </span>

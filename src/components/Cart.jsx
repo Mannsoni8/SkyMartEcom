@@ -24,7 +24,7 @@ const Cart = ({ open, onClose }) => {
 
       {/* Drawer */}
       <div
-        className={`absolute right-0 top-0 h-screen w-[460px] bg-[#111111] border-l border-white/10 shadow-2xl transition-transform duration-500 flex flex-col ${
+        className={`absolute right-0 top-0 h-screen w-full max-w-[28rem] sm:max-w-[34rem] bg-[#111111] border-l border-white/10 shadow-2xl transition-transform duration-500 flex flex-col ${
           open ? "translate-x-0" : "translate-x-full"
         }`}
       >
@@ -56,11 +56,11 @@ const Cart = ({ open, onClose }) => {
                 key={item.id}
                 className="rounded-2xl bg-[#1A1A1A] border border-white/10 p-4"
               >
-                <div className="flex gap-4">
+                <div className="flex flex-col gap-4 sm:flex-row">
                   <img
                     src={item.image}
                     alt={item.title}
-                    className="w-24 h-24 rounded-xl object-cover"
+                    className="w-full max-w-[110px] h-24 rounded-xl object-cover"
                   />
 
                   <div className="flex-1">

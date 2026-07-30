@@ -1,13 +1,14 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Mail, Lock, Eye, ArrowRight, Zap } from "lucide-react";
+import { Mail, Lock, Eye, ArrowRight, Zap, EyeOff } from "lucide-react";
 import { useContext } from "react";
 import { useNavigate } from "react-router";
 import { MyShop } from "../context/MyContext";
 import { Slide, toast } from "react-toastify";
 const Login = () => {
   const navigate = useNavigate();
-  const { registerUsers, setLoggedInUser } = useContext(MyShop);
+  const { registerUsers, setLoggedInUser, showPassword, setShowPassword } =
+    useContext(MyShop);
   const {
     register,
     handleSubmit,
@@ -33,7 +34,7 @@ const Login = () => {
     setLoggedInUser(user);
     localStorage.setItem("loggedinUser", JSON.stringify(user));
 
-   toast.success("Logged In successfully", {
+    toast.success("Logged In successfully", {
       position: "top-left",
       autoClose: 1000,
       hideProgressBar: false,
@@ -150,7 +151,7 @@ const Login = () => {
                 <Lock className="h-5 w-5 text-[#9ca3af] group-focus-within:text-[#f3f4f6] transition-colors" />
               </div>
               <input
-                type="password"
+                type={showPassword ? "text" : "password"}
                 autoComplete="current-password"
                 placeholder="Password"
                 {...register("password", {
@@ -166,9 +167,14 @@ const Login = () => {
               />
               <button
                 type="button"
+                onClick={() => setShowPassword(!showPassword)}
                 className="absolute right-4 top-1/2 -translate-y-1/2"
               >
-                <Eye className="h-5 w-5 text-[#9ca3af] hover:text-[#f3f4f6] transition-colors" />
+                {showPassword ? (
+                  <EyeOff className="h-5 w-5 text-[#9ca3af] hover:text-white transition-colors" />
+                ) : (
+                  <Eye className="h-5 w-5 text-[#9ca3af] hover:text-white transition-colors" />
+                )}
               </button>
               {errors.password && (
                 <p className="text-red-500 text-xs mt-1.5 absolute -bottom-6 left-2">
