@@ -1,15 +1,15 @@
-import React from "react";
+import { lazy } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router";
-import AuthLayout from "../layouts/AuthLayout";
-import MainLayout from "../layouts/MainLayout";
-import Login from "../pages/Login";
-import Signup from "../pages/Singup";
-import ProtectedRoutes from "./ProtectedRoutes";
-import PublicRoute from "./PublicRoute";
-import Home from "../pages/Home";
-import Shope from "../pages/Shope";
-import About from "../pages/About";
-import Cart from "../components/Cart";
+const AuthLayout = lazy(() => import("../layouts/AuthLayout"));
+const MainLayout = lazy(() => import("../layouts/MainLayout"));
+const Login = lazy(() => import("../pages/Login"));
+const Signup = lazy(() => import("../pages/Singup"));
+const ProtectedRoutes = lazy(() => import("./ProtectedRoutes"));
+const PublicRoute = lazy(() => import("./PublicRoute"));
+const Home = lazy(() => import("../pages/Home"));
+const Shope = lazy(() => import("../pages/Shope"));
+const About = lazy(() => import("../pages/About"));
+const Cart = lazy(() => import("../components/Cart"));
 
 const router = createBrowserRouter([
   {
