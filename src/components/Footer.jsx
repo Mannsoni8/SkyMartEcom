@@ -16,9 +16,8 @@ const Footer = () => {
         {/* Copyright */}
 
         <p className="text-sm text-gray-500 text-center">
-          © 2026 SkyMart • Built with <span className="text-white">React</span>{" "}
-          + <span className="text-white">Redux</span> +{" "}
-          <span className="text-white">TanStack Query</span>
+          © 2026 SkyMart • Built with{" "}
+          <span className="text-white">React</span>{" "}
         </p>
       </div>
     </footer>
